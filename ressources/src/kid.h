@@ -41,20 +41,25 @@ public:
             {
                 unsigned int step = 0;
                 for(step = 0; step < gui_interface->nbSteps() + 1; step++) {
-
-                    (*ref)[step]->acquire();
+                    if(step == 0){
+                        (*ref)[step]->acquire();
+                    }
                     // Déplacement d'un enfant
                     gui_interface->travel(t,             // ID de l'enfant
                                           (step)%(gui_interface->nbSteps()+1), // marche d'arrivée
-                                          t+1*1000);   // Temps en millisecondes
+                                          (t+1)*100);   // Temps en millisecondes
+                    if(step != 0)
+                        (*ref)[step-1]->release();
+
                     QThread::usleep(qrand()*t % 100000);
 
-                    if(step != 0)
-                        (*ref)[step -1]->release();
-
-
+                    if(step != gui_interface->nbSteps()){
+                        (*ref)[step+1]->acquire();
+                    }
                 }
+                (*ref)[step-1 ]->release();
             }
+
 
             // Va jouer un moment
             gui_interface->play(t,(t+1)*1000);
