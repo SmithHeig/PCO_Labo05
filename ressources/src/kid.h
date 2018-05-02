@@ -14,6 +14,7 @@
 #define KID_H
 
 #include <QThread>
+#include <QSemaphore>
 
 #include "pslideinterface.h"
 
@@ -24,8 +25,10 @@
   */
 class Kid: public QThread
 {
+private:
+    static QSemaphore* sem;
 public:
-    Kid(unsigned int id, PSlideInterface *interface) : id(id), gui_interface(interface) {}
+    Kid(unsigned int id, PSlideInterface *interface, QSemaphore*** ref) : id(id), gui_interface(interface), ref(ref) {}
 
     void run() Q_DECL_OVERRIDE {
         unsigned int t = id;
@@ -38,11 +41,18 @@ public:
             {
                 unsigned int step = 0;
                 for(step = 0; step < gui_interface->nbSteps() + 1; step++) {
+
+                    (*ref)[step]->acquire();
                     // Déplacement d'un enfant
                     gui_interface->travel(t,             // ID de l'enfant
                                           (step)%(gui_interface->nbSteps()+1), // marche d'arrivée
                                           t+1*1000);   // Temps en millisecondes
                     QThread::usleep(qrand()*t % 100000);
+
+                    if(step != 0)
+                        (*ref)[step -1]->release();
+
+
                 }
             }
 
@@ -59,6 +69,7 @@ public:
 private:
     unsigned int id;
     PSlideInterface *gui_interface;
+    QSemaphore*** ref;
 };
 
 

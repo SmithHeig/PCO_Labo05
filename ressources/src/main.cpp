@@ -6,7 +6,7 @@
 
 #include "pslideinterface.h"
 #include "kid.h"
-
+#include "toboganmanager.h"
 
 #define NBSTEPS 8
 #define NBKIDS 10
@@ -59,12 +59,16 @@ int main(int argc, char *argv[])
     gui_interface=new PSlideInterface();
 
     // Création de threads
+    /*
     Kid* threads[nbKids];
     for(int t=0; t<nbKids; t++){
         std::cout << "Création du thread "<< t << std::endl;
         threads[t] = new Kid(t, gui_interface);
         threads[t]->start();
     }
+    */
+    toboganManager* tb = new toboganManager(nbKids, gui_interface);
+    tb->start();
 
     // Attention, il est obligatoire d'exécuter l'instruction suivante.
     // C'est elle qui permet la gestion de la boucle des évévements de

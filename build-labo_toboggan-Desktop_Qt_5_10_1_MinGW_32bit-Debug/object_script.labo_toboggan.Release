@@ -1,0 +1,12 @@
+INPUT(
+./obj/display.o
+./obj/main.o
+./obj/mainwindow.o
+./obj/pslideinterface.o
+./obj/kid.o
+./obj/toboganmanager.o
+./obj/qrc_toboggan.o
+./obj/moc_display.o
+./obj/moc_mainwindow.o
+./obj/moc_pslideinterface.o
+);
