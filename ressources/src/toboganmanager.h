@@ -20,9 +20,10 @@ public:
         }
 
         threads = new Kid*[nbKids];
-        for(int t=0; t<nbKids; t++){
+        for(int t=0; t < nbKids; t++){
             std::cout << "Création du thread " << t << std::endl;
             threads[t] = new Kid(t, gui_interface, &mutexMarche);
+            gui_interface->setInitKid(gui_interface->nbSteps() +1, t);
         }
     }
 
