@@ -39,7 +39,6 @@ public:
         while(1) {
             {
                 unsigned int step = 0;
-                for(step = 0; step < gui_interface->nbSteps() + 1; step++) {
                 for(step = 0; step < gui_interface->nbSteps() + 1; step++){
                     if(step == 0){
                         (*ref)[step]->acquire();
@@ -57,7 +56,6 @@ public:
                         (*ref)[step+1]->acquire();
                     }
                 }
-                (*ref)[step-1 ]->release();
                 (*ref)[step-1]->release();
             }
 
