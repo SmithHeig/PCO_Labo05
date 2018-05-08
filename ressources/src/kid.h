@@ -25,8 +25,6 @@
   */
 class Kid: public QThread
 {
-private:
-    static QSemaphore* sem;
 public:
     Kid(unsigned int id, PSlideInterface *interface, QSemaphore*** ref) : id(id), gui_interface(interface), ref(ref) {}
 
