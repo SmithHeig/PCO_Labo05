@@ -1,6 +1,7 @@
 /******************************************************************************
   \file main.cpp
   \author Yann Thoma
+  \modified J.Chatillon, J.Smith
   \date 16.02.2018
 
   Ce fichier propose un squelette pour l'application de modélisation de toboggan.
@@ -41,6 +42,7 @@ public:
             {
                 unsigned int step = 0;
                 for(step = 0; step < gui_interface->nbSteps() + 1; step++) {
+                for(step = 0; step < gui_interface->nbSteps() + 1; step++){
                     if(step == 0){
                         (*ref)[step]->acquire();
                     }
@@ -58,6 +60,7 @@ public:
                     }
                 }
                 (*ref)[step-1 ]->release();
+                (*ref)[step-1]->release();
             }
 
 
