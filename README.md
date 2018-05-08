@@ -12,6 +12,11 @@ Nous avons modifié la classe *Kid* afin qu'elle contienne un pointeur sur le ta
 
 Les *kids* n'apparaissent pas sur l'OS Windows malgré les instructions de modifications données par mail. Cependant, ça fonctionne très bien sur Linux.
 
+##### Message d'erreur: 
+
+```
 QObject::startTimer: Timers cannot be started from another thread
 
 ASSERT: "unindexedItems.isEmpty()" in file graphicsview\qgraphicsscenebsptreeindex.cpp, line 385
+```
+

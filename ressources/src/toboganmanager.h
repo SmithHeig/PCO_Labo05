@@ -39,6 +39,7 @@ public:
         }
     }
 
+
 private:
     unsigned int nbKids;
     PSlideInterface *gui_interface;
